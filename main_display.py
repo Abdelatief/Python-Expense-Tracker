@@ -45,6 +45,12 @@ class MainWindow(QDialog):
         if self.ui.income_radioButton.isChecked():
             pass
 
+    def get_active_radiobtn(self):
+        if self.ui.income_radioButton.isChecked():
+            return 'income'
+        else:
+            return 'expense'
+
     def closeEvent(self, event: QtGui.QCloseEvent):
         exit()
         event.accept()

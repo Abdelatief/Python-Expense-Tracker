@@ -10,9 +10,13 @@ class Categories:
                                   'income': self.income_categories}
             self.refresh()
 
+        def category_exists(self, category_type: str, category: str):
+            category = category.strip()
+            return category.lower() not in (old_category.lower() for old_category in self.category_list[category_type])
+
         def save_category(self, category_type: str, category: str):
             category = category.strip()
-            if category.lower() not in (old_category.lower() for old_category in self.category_list[category_type]):
+            if self.category_exists(category_type, category):
                 file = category_type + '.txt'
                 with open(file, 'a') as writer:
                     writer.write(category + '\n')
@@ -24,10 +28,15 @@ class Categories:
 
         def edit(self, category_type: str, old_category: str, new_category: str):
             # we want to edit the category in the list
-            self.category_list[category_type][self.category_list[category_type].index(old_category)] = new_category
-
-            # write the list to the category file
-            self._write_list(category_type)
+            new_category = new_category.strip()
+            if self.category_exists(category_type, new_category):
+                self.category_list[category_type][self.category_list[category_type].index(old_category)] = new_category
+                # write the list to the category file
+                self._write_list(category_type)
+                return True
+            else:
+                print('New category name already exists!')
+                return False
 
         def delete(self, category_type: str, category: str):
             self.category_list[category_type].remove(category)
