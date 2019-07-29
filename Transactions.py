@@ -33,7 +33,7 @@ class Transactions:
             with DatabaseManager() as db:
                 db.execute('select rowid from Transactions order by rowid desc limit 1')
                 rowid = db.fetchone()[0]
-            self.transactions_dict[type_].loc[rowid] = [category, amount, date, note, type_]
+            self.transactions_dict[type_].loc[rowid] = [category, amount, str(date), note, type_]
 
         def edit(self, rowid, new_category, new_amount, new_date, new_note):
             # category, amount, date, note, type

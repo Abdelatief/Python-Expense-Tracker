@@ -143,7 +143,10 @@ class CategoriesWindow(QDialog):
             else:
                 print('delete query no')
         else:
-            print('no item is selected')
+            QMessageBox.warning(self,
+                                'Fields Required',
+                                'Please select a category before clicking the delete button again',
+                                QMessageBox.Ok)
 
     def expense_radiobtn_active(self):
         if self.ui.expense_radioButton.isChecked():
