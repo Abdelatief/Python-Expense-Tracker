@@ -200,7 +200,20 @@ class MainWindow(QDialog):
                                 QMessageBox.Ok)
 
     def delet_button_click(self):
-        pass
+        selected_transaction = self.get_table_selection()
+        if selected_transaction:
+            delete_question = QMessageBox.question(self,
+                                                   'Delete Transaction',
+                                                   'Are you sure you want to delete the selected transaction',
+                                                   QMessageBox.Yes | QMessageBox.No)
+            if delete_question == QMessageBox.Yes:
+                self.transactions.delete(selected_transaction['row_id'])
+                self.load_table()
+        else:
+            QMessageBox.warning(self,
+                                'Nothing is selected',
+                                'Please select something first before you click the delete button again',
+                                QMessageBox.Ok)
 
     def view_button_click(self):
         pass
