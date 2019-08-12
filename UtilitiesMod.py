@@ -5,9 +5,6 @@ from os import system
 from sys import stderr
 
 
-chdir(r"/home/abdelatief/PycharmProjects/ExpenseTracker The real python")
-
-
 class DatabaseManager:
     """Context manager class that handles the database connections."""
     def __init__(self, database: str = 'ExpenseTrackerDatabase.db'):
